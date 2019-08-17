@@ -8,7 +8,6 @@ spec:
     # The service becomes a network endpoint for either other services
     # or maybe external users to connect to (eg browsers) 
     app: webapp
-    release: "0-5"
   ports:
     - name: http
       port: 80
@@ -16,5 +15,21 @@ spec:
       # Greater 30 Thousand & to use only for NodePort 
 
       # type: ClusterIP -> Private IP, Not expose to outside world
+
+  type: NodePort        
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-queue
+spec:
+  selector:
+    app: queue
+  ports:
+    - name: http
+      port: 8161
+      nodePort: 30010     
 
   type: NodePort        
